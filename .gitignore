@@ -1,0 +1,4 @@
+__pycache__
+.conf.json
+uptime_checks.json
+uptime_bot.log

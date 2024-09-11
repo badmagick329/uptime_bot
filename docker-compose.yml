@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: "always"
+    volumes:
+      - ./src:/usr/src/app
+
+volumes:
+  staticfiles:
