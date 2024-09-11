@@ -1,0 +1,20 @@
+[
+  {
+    "addresses": [
+      "https://mypage1.com/",
+      "https://mypage2.com/",
+      "https://mypage3.com/",
+      "https://mypage4.com/"
+    ],
+    "email": ["me@email.com","admin@email.com"]
+  },
+  {
+    "addresses": [
+      "https://page1.com/",
+      "https://page2.com/",
+      "https://page3.com/",
+      "https://page4.com/"
+    ],
+    "email": ["pageowner@email.com"]
+  }
+]
