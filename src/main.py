@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import httpx
 
+from config import Config
 from consts import UPTIME_FILE
 from sender import SMTPSender
 
@@ -29,12 +30,13 @@ def main():
     with open(UPTIME_FILE, "r", encoding="utf-8") as f:
         uptime_checks = json.load(f)
 
+    config = Config()
     sender = SMTPSender()
 
     for check in uptime_checks:
         addresses = check.get("addresses")
         email = check.get("email")
-        results = check_addresses(addresses)
+        results = check_addresses(addresses, timeout=config.timeout)
         failed_checks = get_failed_checks(results)
         if failed_checks:
             failed_checks_str = "\n".join([str(r) for r in failed_checks])
@@ -56,11 +58,11 @@ def get_failed_checks(results: list[Result]) -> list[Result]:
     return failed_checks
 
 
-def check_addresses(addresses: list[str]) -> list[Result]:
+def check_addresses(addresses: list[str], timeout: int) -> list[Result]:
     results: list[Result] = []
     for address in addresses:
         try:
-            results.append(check_status(address))
+            results.append(check_status(address, timeout))
         except httpx.TimeoutException:
             results.append(Result(address, 408))
         except Exception:
@@ -68,8 +70,8 @@ def check_addresses(addresses: list[str]) -> list[Result]:
     return results
 
 
-def check_status(address: str) -> Result:
-    resp = httpx.get(address, timeout=0.5)
+def check_status(address: str, timeout: int) -> Result:
+    resp = httpx.get(address, timeout=timeout)
     return Result(address, resp.status_code)
 
 

@@ -9,6 +9,7 @@ class Config:
     _smtp_user: str
     _smtp_password: str
     _smtp_host: str
+    _timeout: int
 
     def __init__(self) -> None:
         assert CONF_FILE.is_file, "Config file not found"
@@ -19,6 +20,7 @@ class Config:
         self._smtp_password = conf["SMTP_PASSWORD"]
         self._smtp_host = conf["SMTP_HOST"]
         self._test_address = conf["TEST_ADDRESS"]
+        self._timeout = conf["TIMEOUT"]
 
     @property
     def config_file(self) -> Path:
@@ -39,3 +41,7 @@ class Config:
     @property
     def test_address(self) -> str:
         return self._test_address
+
+    @property
+    def timeout(self) -> int:
+        return self._timeout

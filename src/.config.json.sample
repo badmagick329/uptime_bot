@@ -2,5 +2,6 @@
   "SMTP_USER": "me@email.com",
   "SMTP_PASSWORD": "password123",
   "SMTP_HOST": "smtp.address.com",
-  "TEST_ADDRESS": "mytestaddress@test.com"
+  "TEST_ADDRESS": "mytestaddress@test.com",
+  "TIMEOUT": 1.5
 }
