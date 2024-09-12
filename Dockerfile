@@ -11,7 +11,7 @@ RUN pip install --upgrade pip
 COPY pyproject.toml poetry.lock ./
 RUN pip install poetry==1.8.2
 RUN poetry config virtualenvs.create false
-RUN poetry install --no-root --without dev
+RUN poetry install --no-root
 
 COPY crontab /etc/cron.d/crontab
 RUN chmod 0644 /etc/cron.d/crontab
